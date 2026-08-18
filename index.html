@@ -1,0 +1,562 @@
+<title>Kymmypot</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --accent:#4da6ff;
+  --muted:#eaf6ff;
+  --panel-dark: rgba(5,25,55,0.5);
+  --purple-glow: rgba(77,166,255,0.7);
+}
+
+
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: 'Press Start 2P', monospace;
+  color: var(--muted);
+  background: url("https://i.postimg.cc/rFr7QZp1/bg.gif") no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+}
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: -1;
+}
+#intro {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 16px;
+  z-index: 999;
+  transition: opacity 0.6s;
+}
+#unlockBtn {
+  margin-top: 20px;
+  padding: 14px 28px;
+  font-family: 'Press Start 2P', monospace;
+  font-weight: bold;
+  font-size: 14px;
+  background: var(--accent);
+  color: #000;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+#unlockBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px var(--accent);
+}
+.topbar{
+  position: sticky;
+  top:0;
+  z-index:60;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 36px;
+  backdrop-filter:blur(10px);background:rgba(5,20,45,.45);border-bottom:1px solid rgba(77,166,255,.25);
+  border-bottom: 2px solid #000;
+}
+.brand{
+  display:flex;
+  gap:14px;
+  align-items:center;
+}
+.brand .logo-blob{
+  width:36px;
+  height:36px;
+  border-radius:0;
+
+ background:linear-gradient(135deg,#b8e4ff,#4da6ff,#1677d2);
+
+  box-shadow:0 6px 18px rgba(167,139,250,0.12);
+  animation: wiggle 3s infinite ease-in-out;
+}
+.brand h1{
+  font-size:18px;
+  margin:0;
+  font-weight:800;
+  letter-spacing:0.6px;
+}
+.navlinks{
+  display:flex;
+  gap:22px;
+  align-items:center;
+}
+.navlinks a{
+  text-decoration: none;
+  font-weight:600;
+  color:var(--muted);
+  font-size:13px;
+  padding:8px 10px;
+  border-radius:0;
+  border:2px solid #000;
+  transition:all .18s;
+}
+.navlinks a:hover{
+  background:rgba(0,0,0,0.2);
+  transform:translateY(-2px);
+}
+h1,h2,h4{
+  background:linear-gradient(
+      90deg,
+
+#8ed6ff,
+#4da6ff,
+#b8e4ff,
+#1677d2
+
+  );
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-size:300% 300%;
+  animation:gradientShift 6s linear infinite;
+}
+@keyframes gradientShift {
+  0% {background-position: 0% 50%;}
+  100% {background-position: 200% 50%;}
+}
+.music-player, .mini-game, .personal-message, .ending {
+  padding: 20px;
+  margin: 40px auto;
+  max-width: 800px;
+
+  background:rgba(8,30,65,.72); border:1px solid rgba(77,166,255,.25); box-shadow:0 0 25px rgba(40,140,255,.18);
+
+  border-radius: 15px;
+  text-align:center;
+}
+.music-player button, .mini-game button, .personal-message button {
+  margin: 10px;
+  padding: 10px 15px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+
+  background:linear-gradient(180deg,#5eb7ff,#1677d2);box-shadow:0 8px 18px rgba(40,140,255,.25);
+
+  color:white;
+}
+#choices button {
+  display: block;
+  width: 80%;
+  margin: 10px auto;
+  padding: 15px;
+  font-size: 10px;
+}
+.lyrics {
+  margin-top:20px;
+  max-width:600px;
+  margin-left:auto;
+  margin-right:auto;
+  padding:15px;
+
+  background:rgba(5,20,45,.65);border:1px solid rgba(77,166,255,.18);
+
+  backdrop-filter:blur(6px);
+  border-radius:10px;
+  display:none;
+  white-space: pre-wrap;
+  text-align:center;
+  font-size: 12px;
+}
+.envelopes{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  margin-top:20px;
+}
+.envelope{
+  width:80px;
+  height:80px;
+
+background:linear-gradient(180deg,#5eb7ff,#1677d2);box-shadow:0 10px 20px rgba(40,140,255,.25);
+
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition: all 0.3s;
+  position: relative;
+}
+.envelope span{
+  position:absolute;
+  bottom:-25px;
+  font-size:8px;
+  color:#fff;
+}
+.envelope:hover{
+  box-shadow: 0 0 20px 6px var(--accent);
+  transform: translateY(-5px);
+}
+.score{
+  margin-top:15px;
+  font-size:16px;
+  font-weight:bold;
+  color: var(--accent);
+}
+
+body::after{
+content:"";
+position:fixed;
+inset:0;
+pointer-events:none;
+
+background:
+radial-gradient(circle at top left,rgba(255,175,70,.12),transparent 35%),
+radial-gradient(circle at bottom right,rgba(255,120,60,.12),transparent 40%);
+
+mix-blend-mode:screen;
+}
+
+</style>
+</head>
+<body>
+
+<div id="intro">
+  <h1>Open mo tong website na to</h1>
+  <p>Click to open!</p>
+  <button id="unlockBtn">🔓 Unlock</button>
+</div>
+
+<div id="mainSite" style="display:none;">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo-blob"></div>
+      <h1>Kimmy</h1>
+    </div>
+    <nav class="navlinks">
+      <a href="#about">ABOUT</a>
+      <a href="#music">MUSIC</a>
+      <a href="#mini-game">GAME</a>
+      <a href="#personal-message">MESSAGE</a>
+    </nav>
+  </header>
+
+  <section id="about" style="padding:80px 4vw 40px; text-align:center;">
+    <h1>About This Website</h1>
+    <p style="max-width:800px;margin:0 auto;font-size:14px;line-height:1.8;color:#fff;">
+      This little website was made specially for you, because apparently, a simple birthday greeting wasn't enough. 😭💙!<br>
+      I wanted to make something that feels a little more personal — something you can click through, play with, listen to, and hopefully smile at. Sooo here you go! A tiny corner of the internet dedicated to celebrating you.
+
+Thank you for being one of the people who made life a little more fun, chaotic, and memorable. I hope this website reminds you that you're appreciated, loved, and definitely not getting rid of me anytime soon. HAHAHA I love you so much !!!! <br>
+
+For me, "CINEMA" is our theme song pag usapang STRAYKIDS HAHAHAHAH
+    </p>
+  </section>
+
+  <section id="music" class="music-player">
+    <h2>Music & Lyrics</h2>
+    <p> Songs that made me miss our bond face-to-face</p>
+    <button onclick="playSong('music1')">Cover Me by straykids</button>
+    <button onclick="playSong('music2')">Still With You by Jungkook</button>
+    <button onclick="playSong('music3')">Try Again by Jaehyun and d.ear</button>
+    <div class="lyrics" id="lyrics"></div>
+  </section>
+
+  <section id="mini-game" class="mini-game">
+    <h2>Mini Game: 5 Questions</h2>
+    <p id="questionText" style="font-size: 12px; line-height: 1.5;"></p>
+    <div id="choices"></div>
+    <div class="score" id="scoreText"></div>
+    <button id="retryBtn" onclick="startGame()" style="display:none;">Retry Round</button>
+  </section>
+
+  <section id="personal-message" class="personal-message">
+    <h2>Click an Envelope</h2>
+    <div class="envelopes">
+      <div class="envelope" data-mood="Sad">📩 <span>Sad</span></div>
+      <div class="envelope" data-mood="Frustrated">📩 <span>Frustrated</span></div>
+      <div class="envelope" data-mood="Insecure">📩 <span>Insecure</span></div>
+    </div>
+    <div class="message" id="messageText" style="margin-top:40px; font-size:14px; color:#fff; min-height: 20px;"></div>
+  </section>
+
+ <section id="ending" class="ending">
+    <h2>BFF FOREVER</h2>
+    <p>I LUV U TWIN 💗💗💗</p>
+
+    <br><br>
+
+    <button onclick="window.location.href='bonus.html'">
+        🎁 One Last Gift
+    </button>
+</section>
+</div>
+
+<audio id="bgMusic" src="bgmusic.mp3" loop></audio>
+<audio id="music1" src="music1.mp3"></audio>
+<audio id="music2" src="music2.mp3"></audio>
+<audio id="music3" src="music3.mp3"></audio>
+
+<script>
+// --- OPENING LOGIC ---
+const intro = document.getElementById('intro');
+const mainSite = document.getElementById('mainSite');
+const unlockBtn = document.getElementById('unlockBtn');
+const bgMusic = document.getElementById('bgMusic');
+
+unlockBtn.addEventListener('click', ()=>{
+  intro.style.opacity=0;
+  bgMusic.play().catch(e => console.log("Autoplay blocked, waiting for interaction"));
+  setTimeout(()=>{
+    intro.style.display='none';
+    mainSite.style.display='block';
+    startGame(); // Start quiz when site opens
+  },600);
+});
+
+// --- MUSIC PLAYER ---
+const lyricsDiv = document.getElementById('lyrics');
+const songs = ['music1','music2','music3'];
+const lyricsData = {
+  music1: `달이 이렇게 눈부시는 밤엔
+Why do I feel so lonely in this night?
+새벽바람은 마법일까?
+창문에 걸려 있는 starry night
+저 밝은 빛에 뒤척이다 날이 샌다
+이유를 알 수 없는 외로움에
+걸터앉아 오지 않는 너
+숱하게 피어 있는 방황에
+어지러워, 누가 나를 좀 안아줘
+I don't know
+뭘 해야 할지도
+억지로 웃어 봐도
+달이 이렇게 눈부시는 밤엔
+누가 저 빛을 가려주길 외쳐
+밤이 어느새 끝이 나는 낮엔
+따스한 빛을 내리쬐는 빛을 받아줘
+Needle in a haystack 나를 찾아줘
+외롭진 않은데 모든 게 너무 차가워
+저 빛의 손을 내게 기울인다면
+그동안 얼어붙은 공허함을 녹여줘
+Yeah, I tried to hide away from all the sorrow and pain
+But little did I know that I was going insane
+The sun will always be there, waiting after the rain
+눈 감고서 햇빛을 바라보며 웃어 볼래
+I don't know
+뭘 해야 할지도
+억지로 웃어 봐도
+달이 이렇게 눈부시는 밤엔
+누가 저 빛을 가려주길 외쳐
+밤이 어느새 끝이 나는 낮엔
+따스한 빛을 내리쬐는 빛을 받아줘
+I can't take it anymore, what should I do?
+(What should I do? What should I do?)
+오늘은 모른 척 눈감아 줘
+So, cover me now
+Cover me now
+달이 이렇게 눈부시는 밤엔
+누가 저 빛을 가려주길 외쳐
+밤이 어느새 끝이 나는 낮엔
+따스한 빛을, 내리쬐는 빛을,`,
+  music2: `날 스치는 그대의 옅은 그 목소리
+내 이름을 한 번만 더 불러주세요
+얼어버린 노을 아래 멈춰 서있지만
+그대 향해 한 걸음씩 걸어갈래요, still with you
+어두운 방, 조명 하나 없이
+익숙해지면 안 되는데, 그게 또 익숙해
+나지막이 들리는 이 에어컨 소리
+이거라도 없으면 나 정말 무너질 것 같아
+함께 웃고, 함께 울고
+이 단순한 감정들이 내겐 전부였나 봐
+언제쯤일까 다시 그댈 마주한다면?
+눈을 보고 말할래요, 보고 싶었어요
+황홀했던 기억 속에 (속에)
+나 홀로 춤을 춰도 비가 내리잖아
+이 안개가 걷힐 때쯤 젖은 발로 달려갈 게
+그때 날 안아줘
+저 달이 외로워 보여서
+밤하늘에 환하게 울고 있는 것 같아서
+언젠가 아침이 오는 걸 알면서도
+별처럼 너의 하늘에 머물고 싶었어 (어)
+하루를 그 순간을
+이렇게 될 걸 알았다면, 더 담아뒀을 텐데
+언제쯤일까 다시 그댈 마주한다면?
+눈을 보고 말할래요, 보고 싶었어요
+황홀했던 기억 속에 (속에)
+나 홀로 춤을 춰도 비가 내리잖아
+이 안개가 걷힐 때쯤 젖은 발로 달려갈 게
+그때 날 잡아줘
+Ah-ah-ah-ah, ah-ah-ah-ah
+Ah-ah-ah, mmh, mmh
+Ah-ah-ah-ah, ah-ah-ah-ah
+Ah-ah-ah, ah-ah, ah-ah
+날 바라보는 희미한 미소 뒤편에
+아름다운 보랏빛을 그려볼래요
+서로 발걸음이 안 맞을 수도 있지만
+그대와 함께 이 길을 걷고 싶어요, still with you`,
+  music3: `우리가 나눈
+긴 시간만큼 늘어난 기대는
+어쩌면 당연할지도 몰라
+수많은 외침도
+서로의 맘엔 닿지 못한 채
+그렇게 흘러가기도 했지만
+
+So whenever you ask me again
+How I feel
+Please remember
+My answer is you
+
+먼 길을 다시 돌아간다 해도
+난 여전히 같은 맘일 테니까
+We'll be alright
+I want to try again
+
+잦은 다툼에
+몇 번이고 다시 무너져도
+중요한 건 우리라고 말했듯
+무의미하지 않아
+한 걸음 더 나아가는 거라고
+지난날이 말해주고 있는 걸
+
+So whenever you ask me again
+How I feel
+Please remember
+My answer is you
+
+먼 길을 다시 돌아간다 해도
+난 여전히 같은 맘일 테니까
+We'll be alright
+I want to try again
+
+같은 반복이어도
+You should know that
+I'm always on your side
+Please remember
+My answer is you
+
+먼 길을 다시 돌아간다 해도
+난 여전히 같은 맘일 테니까
+We'll be alright
+I want to try again
+
+We'll be alright
+Please try again`
+};
+
+function playSong(songId){
+  bgMusic.pause();
+  songs.forEach(id=>{
+    const s = document.getElementById(id);
+    s.pause();
+    s.currentTime = 0;
+  });
+  const song = document.getElementById(songId);
+  song.play();
+  lyricsDiv.style.display='block';
+  lyricsDiv.textContent=lyricsData[songId];
+  song.onended=()=>{
+    lyricsDiv.style.display='none'; 
+    bgMusic.play();
+  }
+}
+
+// --- MINI GAME LOGIC ---
+const questionsData = [
+  {q:"When bday ko?", a:"Nov. 17, 2009", choices:["Nov. 17, 2009","Nov. 18, 2009","Dec. 17, 2009","Nov. 17, 2010","Oct. 17, 2009"]},
+  {q:"Who bias ko sa seventeen?", a:"walang tamang sagot", choices:["Jeonghan","S.Coups","Joshua","DK","walang tamang sagot"]},
+  {q:"Bakit binaril si Rizal?", a:"tanong mo sa pagong", choices:["tanong mo sa pagong","7:00 am","Wala","Hindi ko alam","Rizal lang"]},
+  {q:"When birthday mo?", a:"August 18, 2009", choices:["July 31, 2010","malay ko sayo te","August 27, 2009","Aug 30, 2008","Aug 30, 2011"]},
+  {q:"Ilang taon ka na?", a:"Fossil age", choices:["Fossil age","10","13","12","15"]},
+  {q:"Bias ko sa BTS", a:"Suga", choices:["Suga","Jin","J-Hope","RM","V"]},
+  {q:"Ano oras binaril si Rizal?", a:"7:03 am", choices:["7:03 am","7:00 am","6:00 am","8:00 am","7:30 am"]},
+  {q:"Bakit nila sinasabi na 'tanong mo sa pagong'?", a:"muka bakong pagong?", choices:["muka bakong pagong?","Para sa pagong","Hindi ko alam","Bakit kaya","Wala"]},
+  {q:"Kailan friendship anniversary natin?", a:"wag mo na tanungin, basta since birth nalang", choices:["wag mo na tanungin, basta since birth nalang","Last year","Hindi ko alam","Baka next year","No idea"]},
+  {q:"Kung ang tagalog ng game ay laro, ano naman ang play?", a:"wala", choices:["wala","Play","Laro","I don't know","Hahaha"]},
+  {q:"Naiinis ka na ba magsagot dito? HAHAHA", a:"kahit ano tama dito", choices:["kahit ano tama dito","Oo","Hindi","Siguro","Medyo"]},
+  {q:"Ano oras ako pinanganak?", a:"di ko alam HAHAHA", choices:["di ko alam HAHAHA","7:00 am","8:00 am","9:00 am","10:00 am"]},
+  {q:"Ano muna tagalog ng maganda?", a:"pretty", choices:["pretty","maganda","ganda","cute","ako"]},
+  {q:"Pili ka dito sa song reco ko", a:"sigi pi...", choices:["Dikapamigay","Gangsta Baby","I don't understand but I love you by seventeen","sigi pi","sabog ka ba..."]},
+  {q:"Maganda ka ba?", a:"Tama lahat", choices:["Oo naman","Yes!","Sobra","Definitely","Tama lahat"]},
+  {q:"10+29-792+268-289÷628×19", a:"Wag ka na", choices:["Wag ka na","123","0","NaN","999"]},
+  {q:"STAN STRAY KIDS, NOWADAYS, AND SEVENTEEN", a:"Lahat tama", choices:["YES","YESSS","OPKORS","YES PO","Lahat tama"]},
+  {q:"ilang taon nako?", a:"da1_4him", choices:["da1_4him","10","15","12","14"]},
+  {q:"nagustuhan mo ba to,,,,,", a:"연우", choices:["연우","승민","이노","정한","너 여쁜다"]},
+  {q:"BFF FOREVER?? 💗💗💗💗", a:"Lahat tama", choices:["Yes","Yes!","Yasss","Omsim","Lahat tama"]}
+];
+
+let currentQ = 0;
+let score = 0;
+let currentQuestionsBatch = [];
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+function startGame(){
+  currentQ = 0; 
+  score = 0;
+  shuffleArray(questionsData);
+  currentQuestionsBatch = questionsData.slice(0, 5); // 5 questions only
+  
+  document.getElementById('scoreText').textContent = "";
+  document.getElementById('retryBtn').style.display = "none";
+  showQuestion();
+}
+
+function showQuestion(){
+  const q = currentQuestionsBatch[currentQ];
+  document.getElementById('questionText').textContent = (currentQ + 1) + ". " + q.q;
+  const choicesDiv = document.getElementById('choices');
+  choicesDiv.innerHTML = "";
+  
+  q.choices.forEach(c => {
+    const btn = document.createElement('button');
+    btn.textContent = c;
+    btn.onclick = () => { checkAnswer(c); };
+    choicesDiv.appendChild(btn);
+  });
+}
+
+function checkAnswer(choice){
+  const correct = currentQuestionsBatch[currentQ].a;
+  
+  if(correct === "Tama lahat" || correct === "kahit ano tama dito" || correct === "Lahat tama"){
+    score++;
+  } else if(choice === correct){
+    score++;
+  }
+  
+  currentQ++;
+  
+  if(currentQ >= 5){ 
+    document.getElementById('questionText').textContent = "Round Finished!";
+    document.getElementById('scoreText').textContent = "Score: " + score + "/5";
+    document.getElementById('choices').innerHTML = "";
+    document.getElementById('retryBtn').style.display = "inline-block";
+  } else {
+    showQuestion();
+  }
+}
+
+// --- PERSONALIZED MESSAGE ---
+document.querySelectorAll('.envelope').forEach(env=>{
+  env.addEventListener('click', ()=>{
+    const mood = env.dataset.mood;
+    let text="";
+    if(mood==="Sad") text="Kimmy, bakit ka sad? okie lang malungkot, promise. Kahit walang reason, kahit may reason. Chill ka lang, wag mo pilitin maging okay agad. Here lang me palagi.💖";
+    if(mood==="Frustrated") text="Ano meron te? bat ka galit HSBHAJAJSHABAHA charot, pero i js want to say na nakikita ko yung effort mo, kahit feelng mo walang nangyayari. Nakakapagod talaga te, and it's okay lang na mainis ka or madisappoint. Tao lang tayo, okay lang mag stuggle, normal yan. Huminga ka muna, breath lang. 💜";
+    if(mood==="Insecure") text="Kimmy, Why naman nafefeel mo insecure? ipabarang nating yang nang-evil eye sayo !!💗 HASBHA pero seryoso, if makita mo lang sarili mo sa eyes ko, malalaman mo kung gaano ka ka-special and saur pretty. Enough ka na. Wala kang kailangan baguhin para mahalin ka or magandahan sayo yung mga tao. 💖 (bulag ung mga di nakikita yung kagandahan mo HAHAHA)";
+    document.getElementById('messageText').textContent=text;
+  });
+});
+</script>
+
+</body>
+</html>

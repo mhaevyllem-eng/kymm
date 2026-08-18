@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>MESSAGE FOR YOU</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<style>
+body, html {
+  margin: 0;
+  font-family: 'Press Start 2P', monospace;
+  color: #e0e0d1;
+  background: url("https://i.postimg.cc/Wbchx8gq/bonusbg2.gif") no-repeat center center fixed;
+  background-size: cover;
+}
+
+body {
+  opacity: 0;
+  transition: opacity 2s;
+}
+
+/* INTRO */
+#intro {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+/* BUTTON */
+#unlockBtn {
+  margin-top: 20px;
+  padding: 14px 28px;
+  background: #a2ff6c;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 0 0 20px #a2ff6c;
+}
+
+/* MESSAGE PAGE */
+.overlay {
+  min-height: 100vh;
+  display: none;
+  background: rgba(0,0,0,0.6);
+  padding: 60px 20px;
+  text-align: center;
+}
+
+h2 {
+  color: #a2ff6c;
+  text-shadow: 0 0 10px #a2ff6c;
+}
+
+/* MESSAGE BOX */
+.message-box {
+  max-width: 850px;
+  margin: auto;
+  font-size: 14px;
+  line-height: 1.8;
+  background: rgba(0,0,0,0.35);
+  padding: 20px;
+  border: 2px solid #a2ff6c;
+  box-shadow: 0 0 25px #a2ff6c;
+  white-space: pre-wrap;
+  min-height: 200px;
+}
+
+/* CHOICES */
+#choiceBox {
+  margin-top: 40px;
+  opacity: 0;
+  transition: 1s;
+}
+
+button {
+  font-family: inherit;
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+<div id="intro">
+  <h1>Hi bes !!</h1>
+  <p>Click unlock</p>
+  <button id="unlockBtn">🔓 Unlock</button>
+</div>
+
+<!-- MESSAGE -->
+<div class="overlay" id="messagePage">
+
+  <h2>Message for you</h2>
+
+  <div class="message-box" id="message"></div>
+
+  <!-- CHOICES -->
+  <div id="choiceBox">
+
+    <p style="color:#a2ff6c; font-size:12px;">
+      What do you want to do next?
+    </p>
+
+    <button id="continueReading" style="
+      margin:10px;
+      padding:10px 15px;
+      background:#a2ff6c;
+      border:none;
+      cursor:pointer;
+    ">
+      📖 Continue Reading
+    </button>
+
+    <button id="goBack" style="
+      margin:10px;
+      padding:10px 15px;
+      background:#222;
+      color:#a2ff6c;
+      border:1px solid #a2ff6c;
+      cursor:pointer;
+    ">
+      🔁 Back to Main Page
+    </button>
+
+  </div>
+
+</div>
+
+<audio id="bgMusic" loop>
+  <source src="music4.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const intro = document.getElementById("intro");
+const page = document.getElementById("messagePage");
+const btn = document.getElementById("unlockBtn");
+const msg = document.getElementById("message");
+const choiceBox = document.getElementById("choiceBox");
+
+const text = `Happy birthday, Kimmypot!! 💙💎
+
+SEVENTEEN KA NA???? HELLO???? TANDA MO NA TE 😭😭😭
+
+Like genuinely, paano nangyari 'yon??? Parang kailan lang mga bata pa tayo tapos ngayon 17 ka na. We've literally been friends since KINDER, which is actually insane to think about. Ang tagal na natin magkakilala na minsan hindi ko na alam kung friendship pa ba tawag dito or permanent subscription na kasi wala nang cancellation option. HAHAHAHAHA.
+
+And of course, dahil 17 ka na, kailangan talagang may Seventeen reference dito. Hindi pwedeng birthday mo tapos wala. 😭
+
+#SEVENTEEN_right_here 💎 (ang korni pala jusko,,okay ded is ma)
+
+Okay, enough na sa number 17 HAHAHAHA.
+
+I made this website specifically for your birthday kasi ayoko namang simpleng "happy birthday" lang sabihin ko sa'yo tapos tapos na. Since you've been my best friend for basically half of my entire life, I feel like you deserve something a little more than that. So ayan, pinag-isipan ko, ginawa ko, nilagyan ko ng music, quiz, messages, at kung ano-ano pang kalokohan na pumasok sa utak ko habang ginagawa ko 'to. HAHAHAHAHA.
+
+Honestly, ang weird isipin na we've known each other since we were kids. We were literally just little children na wala namang idea kung gaano katagal yung friendship na meron tayo ngayon. Tapos somehow, after all those years, nandito pa rin tayo. We've grown up, changed, learned different things, met different people, and gone through different phases, pero somehow, we're still here.
+
+I think that's one of the things I appreciate most about our friendship. Hindi naman kailangan laging may malaking ganap para masabing important yung isang friendship. Sometimes it's just knowing na may taong matagal mo nang kasama sa buhay mo, someone who's seen different versions of you, and someone na pwede mong balikan kahit ang dami nang nagbago.
+
+And yes, I'm being sentimental right now. ONE TIME LANG 'TO. Enjoy it habang pwede pa. HAHAHAHAHA.
+
+I hope you know na you're genuinely appreciated. Not just today because it's your birthday, but even on ordinary days na walang celebration or special occasion. You deserve good things, good people, good experiences, and a lot of reasons to laugh.
+
+I hope this year brings you more things that make you happy. I hope you get to experience things you've been looking forward to, discover new things about yourself, and make memories that you'll still be laughing about years from now. And hopefully, marami pa tayong memories na madadagdag sa napakahabang listahan natin. 😭
+
+Also, since 17 ka na, congratulations. You're officially one year closer to being an adult. HAHAHAHAHA good luck. 💀
+
+Pero seriously, don't feel like you have to have everything figured out just because you're getting older. You still have so much time to grow, change your mind, try new things, make mistakes, and figure out what you actually want. Just enjoy where you are right now.
+
+And please don't forget to enjoy your birthday. This is your day, so kain ka nang masarap, mag-enjoy ka, and let yourself be happy. You deserve to celebrate yourself today.
+
+I also hope you know how funny it is that after knowing each other since kindergarten, I can still somehow make an entire website for you and call it a birthday gift. HAHAHAHAHA. Imagine telling kindergarten us na one day, gagawa ako ng website para sa 17th birthday mo. We probably wouldn't even understand half of what I was saying. 😭
+
+But honestly, I'm glad it happened this way.
+
+I'm glad that after all these years, I still get to call you my best friend. My forever sister.
+
+Thank you for being part of so many years of my life. Thank you for the laughs, the random conversations, the stupid moments, the chaos, and everything in between. Thank you for simply being there and for being someone I got to grow up with.
+
+I don't know what the next few years are going to look like for either of us, but I hope that no matter how much things change, we still get to look back at all of this someday and laugh about how stupid we were. HAHAHAHAHA.
+
+And obviously, I hope we get to make a LOT more memories before that happens.
+
+So yeah, Kymmy.
+
+You're **17** now.
+
+Happy 17th birthday, Kimmy!! 🎂💙
+
+I hope you have the best birthday and an even better year ahead.
+
+And don't forget—
+
+BFFZ FOREVER.
+
+You've been stuck with me since kindergarten. Wala ka nang takas. HAHAHAHAHAHA.
+
+Enjoy your birthday, My OG & DAYONES. 💙💎 (send video pag inopen mo na ha tapos iyak ka tas picture ka tas yun yung ilalagay ko sa md AAHAHHAHAHA)
+
+`;
+
+let i = 0;
+
+/* UNLOCK */
+btn.addEventListener("click", () => {
+  intro.style.display = "none";
+  page.style.display = "block";
+
+  const music = document.getElementById("bgMusic");
+  music.volume = 0.5;
+  music.play();
+
+  typeWriter();
+});
+
+/* TYPEWRITER */
+function typeWriter() {
+  if (i < text.length) {
+    msg.innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeWriter, 25);
+  } else {
+    choiceBox.style.opacity = "1";
+  }
+}
+
+/* BUTTONS */
+document.getElementById("goBack").addEventListener("click", () => {
+  window.location.href = "index.html";
+});
+
+document.getElementById("continueReading").addEventListener("click", () => {
+  choiceBox.style.opacity = "0";
+});
+
+/* FADE IN */
+window.addEventListener("load", () => {
+  document.body.style.opacity = "1";
+});
+</script>
+
+</body>
+</html>
